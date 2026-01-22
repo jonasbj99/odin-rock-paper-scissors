@@ -2,12 +2,11 @@ let humanScore = 0;
 let computerScore = 0;
 let tieCounter = 0;
 
-// When remade with UI use input field with only odd numbers, for "best of" (Potential 99 limit)
-let rounds = prompt("How many rounds do you want to play?", "");
-
-playGame(rounds);
+playGame();
 
 function playGame() {
+  // When remade with UI use input field with only odd numbers, for "best of" (Potential 99 limit)
+  let rounds = prompt("How many rounds do you want to play?", "");
   let finalResult;
 
   for (let i = 0; i < rounds; i++) {
