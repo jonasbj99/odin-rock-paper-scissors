@@ -9,8 +9,33 @@
     <link rel="stylesheet" href="./css/styles.css" />
     <script src="./js/rps-ui-game.js"></script>
   </head>
-  <body class="full-screen">
-    <div class="flex-col"></div>
+  <body class="full-screen flex-row">
+    <div class="first-col flex-col">
+      <div class="info-panel">
+        <h2>How to Play</h2>
+        <ul>
+          <li>Choose the buy-in</li>
+          <li>Make your bet and choose your card</li>
+          <li>Empty the computer's wallet to win</li>
+        </ul>
+      </div>
+      <div class="player-panel flex-col">
+        <div class="small-panel">
+          <div class="flex-col">
+            Min.
+            <img src="./img/bet-icon.svg" alt="Minimum bet icon." />
+          </div>
+          <span id="min-bet">100</span>
+        </div>
+        <div class="small-panel">
+          <div class="flex-col">
+            Your
+            <img src="./img/wallet-icon.svg" alt="Player wallet icon." />
+          </div>
+          <span id="player-wallet">1234</span>
+        </div>
+      </div>
+    </div>
     <div class="flex-col"></div>
     <div class="flex-col"></div>
   </body>
