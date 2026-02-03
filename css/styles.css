@@ -13,3 +13,12 @@
   font-weight: 200 900;
   font-display: swap;
 }
+
+:root {
+  --back-col: #373737;
+  --prim-col: #202020;
+  --acc-col: #fb0;
+  --text-col: #fff;
+  --title-font: "League Spartan", Arial, sans-serif;
+  --text-font: "Source Sans 3", Verdana, sans-serif;
+}
