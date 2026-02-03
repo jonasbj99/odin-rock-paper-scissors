@@ -10,10 +10,10 @@
     <script src="./js/rps-ui-game.js"></script>
   </head>
   <body class="full-screen flex-row">
-    <div class="first-col flex-col">
+    <div class="flex-col">
       <div class="info-panel">
         <h2>How to Play</h2>
-        <ul>
+        <ul class="info-list">
           <li>Choose the buy-in.</li>
           <li>Make a bet for the round.</li>
           <li>Choose your card.</li>
@@ -38,6 +38,53 @@
       </div>
     </div>
     <div class="flex-col"></div>
-    <div class="flex-col"></div>
+    <div class="flex-col">
+      <div class="small-panel">
+        <span id="computer-wallet">1234</span>
+        <div class="flex-col">
+          ü
+          <img src="./img/wallet-icon.svg" alt="Computer wallet icon." />
+        </div>
+      </div>
+      <div class="info-panel">
+        <h2>Statistics</h2>
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th scope="col">Stat</th>
+              <th scope="col">Player</th>
+              <th scope="col">Computer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Rock Count</th>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th scope="row">Paper Count</th>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th scope="row">Scissors Count</th>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th scope="row">Biggest Win</th>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th scope="row">Biggest Loss</th>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </body>
 </html>
