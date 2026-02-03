@@ -52,6 +52,8 @@
 
   h2 {
     font-family: var(--title-font);
+    border-bottom: 1px solid var(--text-col);
+    padding-bottom: 10px;
     margin-bottom: 10px;
   }
 
