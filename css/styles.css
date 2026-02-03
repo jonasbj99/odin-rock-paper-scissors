@@ -22,3 +22,21 @@
   --title-font: "League Spartan", Arial, sans-serif;
   --text-font: "Source Sans 3", Verdana, sans-serif;
 }
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.full-screen {
+  width: 100vw;
+  height: 100vw;
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
