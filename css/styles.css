@@ -39,11 +39,15 @@
   color: var(--text-col);
   font-family: var(--text-font);
 
-  .flex-col:nth-child(1) {
+  & > .flex-col:first-child {
     align-items: flex-start;
   }
 
-  .flex-col:nth-child(3) {
+  & > .flex-col:nth-child(2) {
+    flex: 1 1 auto;
+  }
+
+  & > .flex-col:last-child {
     align-items: flex-end;
   }
 }
@@ -66,6 +70,53 @@
 }
 
 /* Center Column */
+.computer-cards {
+  transform: rotate(180deg);
+}
+
+.computer-cards,
+.player-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.game-card {
+  height: 220px;
+  width: 140px;
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--prim-col);
+  color: var(--text-col);
+  border: 0.8em solid var(--acc-col);
+  border-radius: 0.5em;
+  transition: all 0.3s;
+
+  .card-icon {
+    width: 100%;
+  }
+
+  .card-text {
+    font-family: var(--title-font);
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+}
+
+.player-cards {
+  .game-card {
+    cursor: drag;
+
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 8px var(--prim-col);
+    }
+  }
+}
 
 /* Last Column */
 .stats-table {
