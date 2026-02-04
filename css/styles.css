@@ -31,7 +31,7 @@
 
 .full-screen {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 100vw;
   height: 100vh;
   padding: 20px;
@@ -41,14 +41,16 @@
 
   & > .flex-col:first-child {
     align-items: flex-start;
+    flex: 1 1 auto;
   }
 
   & > .flex-col:nth-child(2) {
-    flex: 1 1 auto;
+    padding: 0 50px;
   }
 
   & > .flex-col:last-child {
     align-items: flex-end;
+    flex: 1 1 auto;
   }
 }
 
@@ -70,51 +72,82 @@
 }
 
 /* Center Column */
-.computer-cards {
-  transform: rotate(180deg);
-}
-
 .computer-cards,
-.player-cards {
+.player-cards,
+.selected-cards {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px;
 }
 
+.computer-cards {
+  transform: rotate(180deg) scale(0.9);
+}
+
+.selected-cards {
+  gap: 100px;
+
+  #player-select,
+  #computer-select {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 10px;
+    border: 5px dashed var(--prim-col);
+    width: 200px;
+    height: 300px;
+
+    .select-indicator {
+      position: absolute;
+      width: 50%;
+      z-index: -1;
+    }
+  }
+
+  #player-select {
+    font-family: var(--title-font);
+    font-weight: 700;
+    font-size: 2em;
+    text-align: center;
+    color: var(--prim-col);
+  }
+}
+
+.player-cards {
+  .game-card {
+    cursor: grab;
+
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 10px var(--prim-col);
+    }
+  }
+}
+
 .game-card {
-  height: 220px;
-  width: 140px;
-  padding: 0.5em;
+  height: 240px;
+  width: 160px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: var(--prim-col);
   color: var(--text-col);
-  border: 0.8em solid var(--acc-col);
-  border-radius: 0.5em;
+  border: 12px solid var(--acc-col);
+  border-radius: 10px;
   transition: all 0.3s;
 
   .card-icon {
-    width: 100%;
+    width: 80%;
   }
 
   .card-text {
     font-family: var(--title-font);
     font-weight: 700;
-    font-size: 1.5rem;
-  }
-}
-
-.player-cards {
-  .game-card {
-    cursor: drag;
-
-    &:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 8px var(--prim-col);
-    }
+    font-size: 1.2rem;
   }
 }
 
