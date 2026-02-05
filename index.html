@@ -9,130 +9,165 @@
     <link rel="stylesheet" href="./css/styles.css" />
     <script src="./js/rps-ui-game.js" defer></script>
   </head>
-  <body class="full-screen flex-row">
-    <div class="flex-col">
-      <div class="info-panel">
-        <h2>How to Play</h2>
-        <ul class="info-list">
-          <li>Choose the buy-in.</li>
-          <li>Make a bet for the round.</li>
-          <li>Choose your card.</li>
-          <li>Empty the computer's wallet to win the game.</li>
-        </ul>
-      </div>
-      <div class="player-panel flex-col">
-        <div class="small-panel">
-          <div class="flex-col">
-            Min.
-            <img src="./img/bet-icon.svg" alt="Minimum bet icon." />
+  <body>
+    <dialog>
+      <!-- Name + buy in dialog -->
+      <!-- Name input -->
+      <!-- Buy in Select -->
+      <!-- Potentially min bet indicator -->
+      <!-- Start Game button -->
+    </dialog>
+
+    <dialog>
+      <!-- Bet Dialog -->
+      <!-- 50 step input maximum of smallest wallet minimum = min bet -->
+      <!-- Min and max buttons -->
+      <!-- Lets play button -->
+    </dialog>
+
+    <dialog>
+      <!-- Round Result Dialog -->
+      <!-- Maybe combine with bet dialog -->
+      <!-- Continue button -->
+    </dialog>
+
+    <dialog>
+      <!-- Game Result Dialog -->
+      <!-- Result Text -->
+      <!-- Play Again Button -->
+    </dialog>
+
+    <main class="full-screen flex-row">
+      <div class="flex-col">
+        <div class="info-panel">
+          <h2>How to Play</h2>
+          <ul class="info-list">
+            <li>Choose the buy-in.</li>
+            <li>Make a bet for the round.</li>
+            <li>Choose your card.</li>
+            <li>Empty the computer's wallet to win the game.</li>
+          </ul>
+        </div>
+
+        <div class="player-panel flex-col">
+          <div class="small-panel">
+            <div class="flex-col">
+              Min.
+              <img src="./img/bet-icon.svg" alt="Minimum bet icon." />
+            </div>
+            <span id="minBet">50</span>
           </div>
-          <span id="minBet">50</span>
-        </div>
-        <div class="small-panel">
-          <div class="flex-col">
-            Your
-            <img src="./img/wallet-icon.svg" alt="Player wallet icon." />
-          </div>
-          <span id="playerWallet">1000</span>
-        </div>
-      </div>
-    </div>
-    <div class="flex-col">
-      <div class="computer-cards">
-        <div class="game-card">
-          <img class="card-icon" src="./img/jbj-logo.svg" />
-          <span class="card-text"></span>
-        </div>
-        <div class="game-card">
-          <img class="card-icon" src="./img/jbj-logo.svg" />
-          <span class="card-text"></span>
-        </div>
-        <div class="game-card">
-          <img class="card-icon" src="./img/jbj-logo.svg" />
-          <span class="card-text"></span>
-        </div>
-      </div>
-      <div class="selected-cards">
-        <div id="playerSelect">
-          <span class="select-indicator">YOUR CARD</span>
-        </div>
-        <div class="small-panel">
-          <div class="flex-col">
-            Bet
-            <img src="./img/bet-icon.svg" alt="Computer wallet icon." />
-            <span id="roundBet">???</span>
+          <div class="small-panel">
+            <div class="flex-col">
+              Your
+              <img src="./img/wallet-icon.svg" alt="Player wallet icon." />
+            </div>
+            <span id="playerWallet">1000</span>
           </div>
         </div>
-        <div id="computerSelect">
-          <img
-            class="select-indicator"
-            src="./img/jbj-logo-dark.svg"
-            alt="Dark smiley logo."
-          />
+      </div>
+
+      <div class="flex-col">
+        <div class="computer-cards">
+          <div class="game-card">
+            <img class="card-icon" src="./img/jbj-logo.svg" />
+            <span class="card-text"></span>
+          </div>
+          <div class="game-card">
+            <img class="card-icon" src="./img/jbj-logo.svg" />
+            <span class="card-text"></span>
+          </div>
+          <div class="game-card">
+            <img class="card-icon" src="./img/jbj-logo.svg" />
+            <span class="card-text"></span>
+          </div>
+        </div>
+
+        <div class="selected-cards">
+          <div id="playerSelect">
+            <span class="select-indicator">YOUR CARD</span>
+          </div>
+          <div class="small-panel">
+            <div class="flex-col">
+              Bet
+              <img src="./img/bet-icon.svg" alt="Computer wallet icon." />
+              <span id="roundBet">50</span>
+            </div>
+          </div>
+          <div id="computerSelect">
+            <img
+              class="select-indicator"
+              src="./img/jbj-logo-dark.svg"
+              alt="Dark smiley logo."
+            />
+          </div>
+        </div>
+
+        <div class="player-cards">
+          <div class="game-card">
+            <img class="card-icon" src="./img/rock-icon.svg" />
+            <span class="card-text">Rock</span>
+          </div>
+          <div class="game-card">
+            <img class="card-icon" src="./img/paper-icon.svg" />
+            <span class="card-text">Paper</span>
+          </div>
+          <div class="game-card">
+            <img class="card-icon" src="./img/scissors-icon.svg" />
+            <span class="card-text">Scissors</span>
+          </div>
         </div>
       </div>
-      <div class="player-cards">
-        <div class="game-card">
-          <img class="card-icon" src="./img/rock-icon.svg" />
-          <span class="card-text">Rock</span>
+
+      <div class="flex-col">
+        <div class="small-panel" style="align-self: flex-start">
+          <span id="computerWallet">1000</span>
+          <div class="flex-col">
+            ü
+            <img src="./img/wallet-icon.svg" alt="Computer wallet icon." />
+          </div>
         </div>
-        <div class="game-card">
-          <img class="card-icon" src="./img/paper-icon.svg" />
-          <span class="card-text">Paper</span>
-        </div>
-        <div class="game-card">
-          <img class="card-icon" src="./img/scissors-icon.svg" />
-          <span class="card-text">Scissors</span>
+
+        <div class="info-panel">
+          <h2>Statistics</h2>
+          <table class="stats-table">
+            <thead>
+              <tr>
+                <th scope="col">Stat</th>
+                <th scope="col">Player</th>
+                <th scope="col">Computer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Rock Count</th>
+                <td id="playerRock">0</td>
+                <td id="computerRock">0</td>
+              </tr>
+              <tr>
+                <th scope="row">Paper Count</th>
+                <td id="playerPaper">0</td>
+                <td id="computerPaper">0</td>
+              </tr>
+              <tr>
+                <th scope="row">Scissors Count</th>
+                <td id="playerScissors">0</td>
+                <td id="computerScissors">0</td>
+              </tr>
+              <tr>
+                <th scope="row">Biggest Win</th>
+                <td id="playerBigW">0</td>
+                <td id="computerBigW">0</td>
+              </tr>
+              <tr>
+                <th scope="row">Biggest Loss</th>
+                <td id="playerBigL">0</td>
+                <td id="computerBigL">0</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </div>
-    <div class="flex-col">
-      <div class="small-panel">
-        <span id="computerWallet">1000</span>
-        <div class="flex-col">
-          ü
-          <img src="./img/wallet-icon.svg" alt="Computer wallet icon." />
-        </div>
-      </div>
-      <div class="info-panel">
-        <h2>Statistics</h2>
-        <table class="stats-table">
-          <thead>
-            <tr>
-              <th scope="col">Stat</th>
-              <th scope="col">Player</th>
-              <th scope="col">Computer</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Rock Count</th>
-              <td>0</td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <th scope="row">Paper Count</th>
-              <td>0</td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <th scope="row">Scissors Count</th>
-              <td>0</td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <th scope="row">Biggest Win</th>
-              <td>0</td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <th scope="row">Biggest Loss</th>
-              <td>0</td>
-              <td>0</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    </main>
   </body>
 </html>

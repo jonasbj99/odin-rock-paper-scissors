@@ -67,7 +67,8 @@
 }
 
 .player-panel {
-  align-items: flex-start;
+  align-self: flex-end;
+  align-items: flex-end;
   gap: 10px;
 }
 
@@ -102,7 +103,6 @@
     .select-indicator {
       position: absolute;
       width: 50%;
-      z-index: -1;
     }
   }
 
@@ -127,6 +127,7 @@
 }
 
 .game-card {
+  z-index: 1;
   height: 240px;
   width: 160px;
   padding: 10px;
