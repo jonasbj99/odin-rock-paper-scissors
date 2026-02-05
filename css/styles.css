@@ -41,16 +41,16 @@
 
   & > .flex-col:first-child {
     align-items: flex-start;
-    flex: 1 1 auto;
+    flex: 1 1 100px;
   }
 
   & > .flex-col:nth-child(2) {
-    padding: 0 50px;
+    padding: 0 20px;
   }
 
   & > .flex-col:last-child {
     align-items: flex-end;
-    flex: 1 1 auto;
+    flex: 1 1 100px;
   }
 }
 
@@ -86,10 +86,10 @@
 }
 
 .selected-cards {
-  gap: 100px;
+  gap: 20px;
 
-  #player-select,
-  #computer-select {
+  #playerSelect,
+  #computerSelect {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -106,7 +106,7 @@
     }
   }
 
-  #player-select {
+  #playerSelect {
     font-family: var(--title-font);
     font-weight: 700;
     font-size: 2em;
@@ -199,5 +199,10 @@
   img {
     height: 30px;
     width: auto;
+  }
+
+  #roundBet {
+    color: var(--text-col);
+    margin-top: 10px;
   }
 }

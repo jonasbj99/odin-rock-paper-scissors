@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="./img/jbj-logo.svg" />
 
     <link rel="stylesheet" href="./css/styles.css" />
-    <script src="./js/rps-ui-game.js"></script>
+    <script src="./js/rps-ui-game.js" defer></script>
   </head>
   <body class="full-screen flex-row">
     <div class="flex-col">
@@ -26,14 +26,14 @@
             Min.
             <img src="./img/bet-icon.svg" alt="Minimum bet icon." />
           </div>
-          <span id="min-bet">100</span>
+          <span id="minBet">50</span>
         </div>
         <div class="small-panel">
           <div class="flex-col">
             Your
             <img src="./img/wallet-icon.svg" alt="Player wallet icon." />
           </div>
-          <span id="player-wallet">1234</span>
+          <span id="playerWallet">1000</span>
         </div>
       </div>
     </div>
@@ -53,10 +53,17 @@
         </div>
       </div>
       <div class="selected-cards">
-        <div id="player-select">
+        <div id="playerSelect">
           <span class="select-indicator">YOUR CARD</span>
         </div>
-        <div id="computer-select">
+        <div class="small-panel">
+          <div class="flex-col">
+            Bet
+            <img src="./img/bet-icon.svg" alt="Computer wallet icon." />
+            <span id="roundBet">???</span>
+          </div>
+        </div>
+        <div id="computerSelect">
           <img
             class="select-indicator"
             src="./img/jbj-logo-dark.svg"
@@ -81,7 +88,7 @@
     </div>
     <div class="flex-col">
       <div class="small-panel">
-        <span id="computer-wallet">1234</span>
+        <span id="computerWallet">1000</span>
         <div class="flex-col">
           ü
           <img src="./img/wallet-icon.svg" alt="Computer wallet icon." />
