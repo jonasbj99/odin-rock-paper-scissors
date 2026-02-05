@@ -7,7 +7,7 @@ const gameObj = {
 };
 
 const computerObj = createPlayer("ü");
-const playerObj = createPlayer(prompt("What should I call you?", "Player"));
+const playerObj = createPlayer("Player");
 
 function createPlayer(name) {
   return {
