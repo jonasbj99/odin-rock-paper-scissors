@@ -209,15 +209,18 @@
 }
 
 .modal {
-  align-items: stretch;
-  justify-content: center;
+  margin: auto;
   padding: 50px;
   border: 2px solid var(--acc-col);
   border-radius: 10px;
   background-color: var(--prim-col);
   color: var(--acc-col);
   font-family: var(--title-font);
-  gap: 20px;
+
+  & > .flex-col {
+    align-items: stretch;
+    gap: 20px;
+  }
 
   .modal-title {
     gap: 5px;
@@ -241,15 +244,21 @@
     padding: 5px 10px;
     width: 100%;
     border-radius: 5px;
+    cursor: pointer;
+
+    option:checked {
+      background-color: var(--prim-col);
+      font-weight: 600;
+    }
   }
 
-  button {
+  .modal-btn {
     align-self: center;
     background-color: var(--acc-col);
     color: var(--back-col);
     padding: 10px 20px;
     width: fit-content;
-    border: none;
+    border: 2px solid var(--acc-col);
     border-radius: 5px;
     font-weight: 700;
     font-family: var(--title-font);
@@ -258,9 +267,8 @@
     transition: all 0.2s;
 
     &:hover {
-      /* Fix Hover */
-      /* transform: scale(0.95); */
-      color: var(--prim-col);
+      background-color: var(--back-col);
+      color: var(--acc-col);
     }
   }
 

@@ -10,41 +10,37 @@
     <script src="./js/rps-ui-game.js" defer></script>
   </head>
   <body>
-    <dialog id="startWindow" class="modal flex-col">
-      <div class="modal-title flex-col">
-        <p>Welcome to</p>
-        <h2>GAMBLE PAPER SCISSORS</h2>
+    <dialog id="startWindow" class="modal">
+      <div class="flex-col">
+        <div class="modal-title flex-col">
+          <p>Welcome to</p>
+          <h2>GAMBLE PAPER SCISSORS</h2>
+        </div>
+        <label>
+          Choose Buy-in:
+          <select name="buyIn" id="buyIn">
+            <option value="1000">1000</option>
+            <option value="2500">2500</option>
+            <option value="5000">5000</option>
+            <option value="10000">10000</option>
+          </select>
+        </label>
+        <button id="startBtn" class="modal-btn">START GAME</button>
       </div>
-      <label>
-        Choose Buy-in:
-        <select name="buyIn" id="buyIn">
-          <option value="1000">1000</option>
-          <option value="2500">2500</option>
-          <option value="5000">5000</option>
-          <option value="10000">10000</option>
-        </select>
-      </label>
-      <button>START GAME</button>
     </dialog>
 
-    <dialog>
-      <!-- Bet Dialog -->
-      <!-- 50 step input maximum of smallest wallet minimum = min bet -->
-      <!-- Min and max buttons -->
-      <!-- Lets play button -->
-    </dialog>
+    <!-- Bet Dialog -->
+    <!-- 50 step input maximum of smallest wallet minimum = min bet -->
+    <!-- Min and max buttons -->
+    <!-- Lets play button -->
 
-    <dialog>
-      <!-- Round Result Dialog -->
-      <!-- Maybe combine with bet dialog -->
-      <!-- Continue button -->
-    </dialog>
+    <!-- Round Result Dialog -->
+    <!-- Maybe combine with bet dialog -->
+    <!-- Continue button -->
 
-    <dialog>
-      <!-- Game Result Dialog -->
-      <!-- Result Text -->
-      <!-- Play Again Button -->
-    </dialog>
+    <!-- Game Result Dialog -->
+    <!-- Result Text -->
+    <!-- Play Again Button -->
 
     <main class="full-screen flex-row">
       <div class="flex-col">
@@ -148,30 +144,30 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr id="rockStat">
                 <th scope="row">Rock Count</th>
-                <td id="pRockStat">0</td>
-                <td id="cRockStat">0</td>
+                <td>0</td>
+                <td>0</td>
               </tr>
-              <tr>
+              <tr id="paperStat">
                 <th scope="row">Paper Count</th>
-                <td id="pPaperStat">0</td>
-                <td id="cPaperStat">0</td>
+                <td>0</td>
+                <td>0</td>
               </tr>
-              <tr>
+              <tr id="scissorsStat">
                 <th scope="row">Scissors Count</th>
-                <td id="pScissorsStat">0</td>
-                <td id="cScissorsStat">0</td>
+                <td>0</td>
+                <td>0</td>
               </tr>
-              <tr>
+              <tr id="bigW">
                 <th scope="row">Biggest Win</th>
-                <td id="pBigW">0</td>
-                <td id="cBigW">0</td>
+                <td>0</td>
+                <td>0</td>
               </tr>
-              <tr>
+              <tr id="bigL">
                 <th scope="row">Biggest Loss</th>
-                <td id="pBigL">0</td>
-                <td id="cBigL">0</td>
+                <td>0</td>
+                <td>0</td>
               </tr>
             </tbody>
           </table>
