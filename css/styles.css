@@ -89,8 +89,8 @@
 .selected-cards {
   gap: 20px;
 
-  #playerSelect,
-  #computerSelect {
+  #pCardSelect,
+  #cCardSelect {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -106,7 +106,7 @@
     }
   }
 
-  #playerSelect {
+  #pCardSelect {
     font-family: var(--title-font);
     font-weight: 700;
     font-size: 2em;
@@ -205,5 +205,66 @@
   #roundBet {
     color: var(--text-col);
     margin-top: 10px;
+  }
+}
+
+.modal {
+  align-items: stretch;
+  justify-content: center;
+  padding: 50px;
+  border: 2px solid var(--acc-col);
+  border-radius: 10px;
+  background-color: var(--prim-col);
+  color: var(--acc-col);
+  font-family: var(--title-font);
+  gap: 20px;
+
+  .modal-title {
+    gap: 5px;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 20px;
+    font-family: var(--text-font);
+    gap: 5px;
+  }
+
+  select {
+    font-family: var(--text-font);
+    background-color: var(--back-col);
+    color: var(--text-col);
+    border: 2px solid var(--acc-col);
+    font-size: 1em;
+    padding: 5px 10px;
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  button {
+    align-self: center;
+    background-color: var(--acc-col);
+    color: var(--back-col);
+    padding: 10px 20px;
+    width: fit-content;
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+    font-family: var(--title-font);
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      /* Fix Hover */
+      /* transform: scale(0.95); */
+      color: var(--prim-col);
+    }
+  }
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
   }
 }

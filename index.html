@@ -10,12 +10,21 @@
     <script src="./js/rps-ui-game.js" defer></script>
   </head>
   <body>
-    <dialog>
-      <!-- Name + buy in dialog -->
-      <!-- Name input -->
-      <!-- Buy in Select -->
-      <!-- Potentially min bet indicator -->
-      <!-- Start Game button -->
+    <dialog id="startWindow" class="modal flex-col">
+      <div class="modal-title flex-col">
+        <p>Welcome to</p>
+        <h2>GAMBLE PAPER SCISSORS</h2>
+      </div>
+      <label>
+        Choose Buy-in:
+        <select name="buyIn" id="buyIn">
+          <option value="1000">1000</option>
+          <option value="2500">2500</option>
+          <option value="5000">5000</option>
+          <option value="10000">10000</option>
+        </select>
+      </label>
+      <button>START GAME</button>
     </dialog>
 
     <dialog>
@@ -55,14 +64,14 @@
               Min.
               <img src="./img/bet-icon.svg" alt="Minimum bet icon." />
             </div>
-            <span id="minBet">50</span>
+            <span id="minBetDisp">50</span>
           </div>
           <div class="small-panel">
             <div class="flex-col">
               Your
               <img src="./img/wallet-icon.svg" alt="Player wallet icon." />
             </div>
-            <span id="playerWallet">1000</span>
+            <span id="pWalletDisp">1000</span>
           </div>
         </div>
       </div>
@@ -84,17 +93,17 @@
         </div>
 
         <div class="selected-cards">
-          <div id="playerSelect">
+          <div id="pCardSelect">
             <span class="select-indicator">YOUR CARD</span>
           </div>
           <div class="small-panel">
             <div class="flex-col">
               Bet
               <img src="./img/bet-icon.svg" alt="Computer wallet icon." />
-              <span id="roundBet">50</span>
+              <span id="roundBetDisp">50</span>
             </div>
           </div>
-          <div id="computerSelect">
+          <div id="cCardSelect">
             <img
               class="select-indicator"
               src="./img/jbj-logo-dark.svg"
@@ -121,7 +130,7 @@
 
       <div class="flex-col">
         <div class="small-panel" style="align-self: flex-start">
-          <span id="computerWallet">1000</span>
+          <span id="cWalletDisp">1000</span>
           <div class="flex-col">
             ü
             <img src="./img/wallet-icon.svg" alt="Computer wallet icon." />
@@ -141,28 +150,28 @@
             <tbody>
               <tr>
                 <th scope="row">Rock Count</th>
-                <td id="playerRock">0</td>
-                <td id="computerRock">0</td>
+                <td id="pRockStat">0</td>
+                <td id="cRockStat">0</td>
               </tr>
               <tr>
                 <th scope="row">Paper Count</th>
-                <td id="playerPaper">0</td>
-                <td id="computerPaper">0</td>
+                <td id="pPaperStat">0</td>
+                <td id="cPaperStat">0</td>
               </tr>
               <tr>
                 <th scope="row">Scissors Count</th>
-                <td id="playerScissors">0</td>
-                <td id="computerScissors">0</td>
+                <td id="pScissorsStat">0</td>
+                <td id="cScissorsStat">0</td>
               </tr>
               <tr>
                 <th scope="row">Biggest Win</th>
-                <td id="playerBigW">0</td>
-                <td id="computerBigW">0</td>
+                <td id="pBigW">0</td>
+                <td id="cBigW">0</td>
               </tr>
               <tr>
                 <th scope="row">Biggest Loss</th>
-                <td id="playerBigL">0</td>
-                <td id="computerBigL">0</td>
+                <td id="pBigL">0</td>
+                <td id="cBigL">0</td>
               </tr>
             </tbody>
           </table>

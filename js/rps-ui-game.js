@@ -1,3 +1,6 @@
+const startModal = document.querySelector("#startWindow");
+startModal.showModal();
+
 const gameObj = {
   minBet: 50,
   buyIn: 1000,
