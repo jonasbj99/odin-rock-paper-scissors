@@ -10,7 +10,7 @@
     <script src="./js/rps-ui-game.js" defer></script>
   </head>
   <body>
-    <dialog id="startWindow" class="modal">
+    <dialog id="startModal" class="modal">
       <div class="flex-col">
         <div class="modal-title flex-col">
           <p>Welcome to</p>
@@ -92,12 +92,15 @@
           <div id="pCardSelect">
             <span class="select-indicator">YOUR CARD</span>
           </div>
-          <div class="small-panel">
-            <div class="flex-col">
-              Bet
-              <img src="./img/bet-icon.svg" alt="Computer wallet icon." />
-              <span id="roundBetDisp">50</span>
+          <div class="current-bet flex-col">
+            <div class="small-panel">
+              <div class="flex-col">
+                Bet
+                <img src="./img/bet-icon.svg" alt="Computer wallet icon." />
+                <span class="bet-display" id="roundBetDisp">50</span>
+              </div>
             </div>
+            <button class="bet-btn">Change Bet</button>
           </div>
           <div id="cCardSelect">
             <img
@@ -144,30 +147,30 @@
               </tr>
             </thead>
             <tbody>
-              <tr id="rockStat">
+              <tr>
                 <th scope="row">Rock Count</th>
-                <td>0</td>
-                <td>0</td>
+                <td id="pRockStat">0</td>
+                <td id="cRockStat">0</td>
               </tr>
-              <tr id="paperStat">
+              <tr>
                 <th scope="row">Paper Count</th>
-                <td>0</td>
-                <td>0</td>
+                <td id="pPaperStat">0</td>
+                <td id="cPaperStat">0</td>
               </tr>
-              <tr id="scissorsStat">
+              <tr>
                 <th scope="row">Scissors Count</th>
-                <td>0</td>
-                <td>0</td>
+                <td id="pScissorsStat">0</td>
+                <td id="cScissorsStat">0</td>
               </tr>
-              <tr id="bigW">
+              <tr>
                 <th scope="row">Biggest Win</th>
-                <td>0</td>
-                <td>0</td>
+                <td id="pBigW">0</td>
+                <td id="cBigW">0</td>
               </tr>
-              <tr id="bigL">
+              <tr>
                 <th scope="row">Biggest Loss</th>
-                <td>0</td>
-                <td>0</td>
+                <td id="pBigL">0</td>
+                <td id="cBigL">0</td>
               </tr>
             </tbody>
           </table>
