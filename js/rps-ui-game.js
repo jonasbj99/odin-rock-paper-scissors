@@ -26,6 +26,15 @@ const startBuyIn = document.querySelector("#buyIn");
 const startBtn = document.querySelector("#startBtn");
 startBtn.addEventListener("click", startGame);
 
+/* Change Bet */
+const showBetBtn = document.querySelector("#showBetBtn");
+showBetBtn.addEventListener("click", showChangeBet);
+
+const betModal = document.querySelector("#betModal");
+const betInput = document.querySelector("#betInput");
+const closeBetBtn = document.querySelector("#closeBetBtn");
+closeBetBtn.addEventListener("click", closeChangeBet);
+
 const gameObj = {
   buyIn: 1000,
   minBet: 50,
@@ -57,9 +66,22 @@ function startGame() {
   startModal.close();
 }
 
-function changeBet() {
-  /* Display change bet modal */
-  /*  */
+function showChangeBet() {
+  betModal.showModal();
+  betInput.setAttribute("min", gameObj.minBet);
+  betInput.setAttribute(
+    "max",
+    playerObj.wallet > computerObj.wallet
+      ? computerObj.wallet
+      : playerObj.wallet,
+  );
+  betInput.value = gameObj.minBet;
+}
+
+function closeChangeBet() {
+  gameObj.roundBet = +betInput.value;
+  roundBetEl.textContent = gameObj.roundBet;
+  betModal.close();
 }
 
 function updateWalletUI() {

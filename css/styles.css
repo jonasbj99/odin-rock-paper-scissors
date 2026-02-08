@@ -255,6 +255,7 @@
     gap: 5px;
   }
 
+  input,
   select {
     font-family: var(--text-font);
     background-color: var(--back-col);

@@ -29,6 +29,16 @@
       </div>
     </dialog>
 
+    <dialog id="betModal" class="modal">
+      <div class="flex-col">
+        <label>
+          How much do you want to bet?
+          <input id="betInput" type="number" step="50" min="50" max="1000" />
+        </label>
+        <button id="closeBetBtn" class="modal-btn">Change Bet</button>
+      </div>
+    </dialog>
+
     <!-- Bet Dialog -->
     <!-- 50 step input maximum of smallest wallet minimum = min bet -->
     <!-- Min and max buttons -->
@@ -97,10 +107,10 @@
               <div class="flex-col">
                 Bet
                 <img src="./img/bet-icon.svg" alt="Computer wallet icon." />
-                <span class="bet-display" id="roundBetDisp">50</span>
+                <span class="bet-display" id="roundBetDisp">0</span>
               </div>
             </div>
-            <button class="bet-btn">Change Bet</button>
+            <button class="bet-btn" id="showBetBtn">Change Bet</button>
           </div>
           <div id="cCardSelect">
             <img
