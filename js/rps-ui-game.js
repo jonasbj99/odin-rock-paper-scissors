@@ -1,3 +1,5 @@
+const SECOND = 1000;
+
 /* Display Elements */
 const pWalletEl = document.querySelector("#pWalletDisp");
 const cWalletEl = document.querySelector("#cWalletDisp");
@@ -19,6 +21,15 @@ const pBigW = document.querySelector("#pBigW");
 const cBigW = document.querySelector("#cBigW");
 const pBigL = document.querySelector("#pBigL");
 const cBigL = document.querySelector("#cBigL");
+
+/* Player Cards */
+const playerHand = document.querySelector("#playerHand");
+const playerCards = playerHand.querySelectorAll("[data-card]");
+playerCards.forEach((card) => card.addEventListener("click", setPlayerChoice));
+
+/* Computer Cards */
+const computerHand = document.querySelector("#computerHand");
+const computerCards = computerHand.querySelectorAll("[data-card]");
 
 /* Starting Dialog */
 const startModal = document.querySelector("#startModal");
@@ -49,7 +60,6 @@ const playerObj = createPlayer("Player");
 
 startModal.showModal();
 
-/* CONSIDER CHANGING SOME OF THE START GAME FUNCTIONALITY TO WORK BASED ON SELECT ELEMENT ON CHANGE LISTENER */
 function startGame() {
   const bI = +startBuyIn.value;
 
@@ -84,6 +94,54 @@ function closeChangeBet() {
   betModal.close();
 }
 
+function setPlayerChoice(event) {
+  playerCards.forEach((card) =>
+    card.removeEventListener("click", setPlayerChoice),
+  );
+  const selectEl = event.currentTarget;
+  playerObj.currentChoice = selectEl.getAttribute("data-card");
+  selectEl.style.visibility = "hidden";
+
+  setTimeout(setComputerChoice, SECOND);
+}
+
+function setComputerChoice() {
+  const cardNum = Math.floor(Math.random() * 3);
+  const handNum = Math.floor(Math.random() * 3); /* Use to remove random  */
+  let choice = null;
+
+  switch (cardNum) {
+    case 0:
+      choice = "Rock";
+      break;
+    case 1:
+      choice = "Paper";
+      break;
+    case 2:
+      choice = "Scissors";
+      break;
+    default:
+      console.warn("Computer could'nt decide! O.o");
+      break;
+  }
+  computerObj.currentChoice = choice;
+  computerHand.children[handNum].style.visibility = "hidden";
+
+  setTimeout(decideRound, SECOND);
+}
+
+function decideRound() {}
+
+function resetRound() {
+  playerCards.forEach((card) => (card.style.visibility = "visible"));
+  computerCards.forEach((card) => (card.style.visibility = "visible"));
+  computerObj.currentChoice = null;
+  playerObj.currentChoice = null;
+  playerCards.forEach((card) =>
+    card.addEventListener("click", setPlayerChoice),
+  );
+}
+
 function updateWalletUI() {
   pWalletEl.textContent = playerObj.wallet;
   cWalletEl.textContent = computerObj.wallet;
@@ -105,9 +163,14 @@ function updateStatsUI() {
   cBigL.textContent = computerObj.bigL;
 }
 
+function capitalizeString(str) {
+  return str.charAt(0).toUpperCase() + str.substring(1).toLowerCase();
+}
+
 function createPlayer(name) {
   return {
     name,
+    currentChoice: null,
     wallet: gameObj.buyIn,
     rpsCount: [0, 0, 0],
     bigW: 0,
