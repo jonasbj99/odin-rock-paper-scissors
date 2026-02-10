@@ -39,11 +39,13 @@
       </div>
     </dialog>
 
-    <!-- Bet Dialog -->
-    <!-- 50 step input maximum of smallest wallet minimum = min bet -->
-    <!-- Min and max buttons -->
-    <!-- Lets play button -->
-
+    <dialog id="roundModal" class="modal">
+      <div class="flex-col" style="align-items: center">
+        <h2 id="roundTitle">Title</h2>
+        <p id="roundText">Round Text</p>
+        <button id="roundBtn" class="modal-btn">Button Text</button>
+      </div>
+    </dialog>
     <!-- Round Result Dialog -->
     <!-- Maybe combine with bet dialog -->
     <!-- Continue button -->
@@ -176,11 +178,6 @@
                 <th scope="row">Biggest Win</th>
                 <td id="pBigW">0</td>
                 <td id="cBigW">0</td>
-              </tr>
-              <tr>
-                <th scope="row">Biggest Loss</th>
-                <td id="pBigL">0</td>
-                <td id="cBigL">0</td>
               </tr>
             </tbody>
           </table>

@@ -19,8 +19,6 @@ const pScissors = document.querySelector("#pScissorsStat");
 const cScissors = document.querySelector("#cScissorsStat");
 const pBigW = document.querySelector("#pBigW");
 const cBigW = document.querySelector("#cBigW");
-const pBigL = document.querySelector("#pBigL");
-const cBigL = document.querySelector("#cBigL");
 
 /* Player Cards */
 const playerHand = document.querySelector("#playerHand");
@@ -29,9 +27,9 @@ playerCards.forEach((card) => card.addEventListener("click", setPlayerChoice));
 
 /* Computer Cards */
 const computerHand = document.querySelector("#computerHand");
-const computerCards = computerHand.querySelectorAll("[data-card]");
+const computerCards = computerHand.querySelectorAll(".game-card");
 
-/* Starting Dialog */
+/* Start Game */
 const startModal = document.querySelector("#startModal");
 const startBuyIn = document.querySelector("#buyIn");
 const startBtn = document.querySelector("#startBtn");
@@ -45,6 +43,13 @@ const betModal = document.querySelector("#betModal");
 const betInput = document.querySelector("#betInput");
 const closeBetBtn = document.querySelector("#closeBetBtn");
 closeBetBtn.addEventListener("click", closeChangeBet);
+
+/* End Round */
+const roundModal = document.querySelector("#roundModal");
+const roundTitle = document.querySelector("#roundTitle");
+const roundText = document.querySelector("#roundText");
+const roundBtn = document.querySelector("#roundBtn");
+roundBtn.addEventListener("click", resetRound);
 
 const gameObj = {
   buyIn: 1000,
@@ -71,8 +76,7 @@ function startGame() {
     bI === 10000 ? 200 : bI === 5000 ? 150 : bI === 2500 ? 100 : 50;
   gameObj.roundBet = gameObj.minBet;
 
-  minBetEl.textContent = gameObj.minBet;
-  updateWalletUI();
+  updateBetUI();
   startModal.close();
 }
 
@@ -85,7 +89,8 @@ function showChangeBet() {
       ? computerObj.wallet
       : playerObj.wallet,
   );
-  betInput.value = gameObj.minBet;
+  betInput.value =
+    gameObj.roundBet > gameObj.minBet ? gameObj.roundBet : gameObj.minBet;
 }
 
 function closeChangeBet() {
@@ -95,19 +100,26 @@ function closeChangeBet() {
 }
 
 function setPlayerChoice(event) {
-  playerCards.forEach((card) =>
-    card.removeEventListener("click", setPlayerChoice),
-  );
-  const selectEl = event.currentTarget;
-  playerObj.currentChoice = selectEl.getAttribute("data-card");
-  selectEl.style.visibility = "hidden";
+  if (
+    playerObj.wallet < gameObj.roundBet ||
+    computerObj.wallet < gameObj.roundBet
+  ) {
+    /* !?! Bet too high */
+  } else {
+    playerCards.forEach((card) =>
+      card.removeEventListener("click", setPlayerChoice),
+    );
+    const selectEl = event.currentTarget;
+    playerObj.currentChoice = selectEl.getAttribute("data-card");
+    selectEl.style.visibility = "hidden";
 
-  setTimeout(setComputerChoice, SECOND);
+    setTimeout(setComputerChoice, SECOND);
+  }
 }
 
 function setComputerChoice() {
   const cardNum = Math.floor(Math.random() * 3);
-  const handNum = Math.floor(Math.random() * 3); /* Use to remove random  */
+  const handNum = Math.floor(Math.random() * 3);
   let choice = null;
 
   switch (cardNum) {
@@ -125,12 +137,71 @@ function setComputerChoice() {
       break;
   }
   computerObj.currentChoice = choice;
-  computerHand.children[handNum].style.visibility = "hidden";
+  computerCards[handNum].style.visibility = "hidden";
 
   setTimeout(decideRound, SECOND);
 }
 
-function decideRound() {}
+function decideRound() {
+  const pChoice = playerObj.currentChoice;
+  const cChoice = computerObj.currentChoice;
+  const winText = `Your ${pChoice} beats ${cChoice} :)`;
+  const lossText = `Your ${pChoice} was beaten by ${cChoice} :(`;
+  const tieText = `You both chose ${pChoice} :|`;
+  let youWin;
+
+  addChoiceStats(playerObj);
+  addChoiceStats(computerObj);
+  updateStatsUI();
+
+  if (pChoice != cChoice) {
+    switch (pChoice) {
+      case "Rock":
+        youWin = cChoice === "Scissors" ? true : false;
+        break;
+      case "Paper":
+        youWin = cChoice === "Rock" ? true : false;
+        break;
+      case "Scissors":
+        youWin = cChoice === "Paper" ? true : false;
+        break;
+      default:
+        console.warn("Winner could'nt be decided! O.o");
+        break;
+    }
+
+    if (youWin) {
+      gameObj.wCount++;
+      playerObj.wallet += gameObj.roundBet;
+      computerObj.wallet -= gameObj.roundBet;
+      checkBigStat(playerObj);
+      displayRoundResult("You Win!", winText, "Yay!");
+    } else {
+      gameObj.lCount++;
+      playerObj.wallet -= gameObj.roundBet;
+      computerObj.wallet += gameObj.roundBet;
+      checkBigStat(computerObj);
+      displayRoundResult("You Lose!", lossText, "Womp Womp..");
+    }
+  } else {
+    gameObj.tCount++;
+    displayRoundResult("It's a Tie!", tieText, "Ehh..");
+  }
+}
+
+function displayRoundResult(title, text, btn) {
+  if (computerObj <= 0) {
+    /* !?! Win condition */
+  } else if (playerObj <= 0) {
+    /* !?! Lose Condition */
+  } else {
+    updateBetUI();
+    roundTitle.textContent = title;
+    roundText.textContent = text;
+    roundBtn.textContent = btn;
+    roundModal.showModal();
+  }
+}
 
 function resetRound() {
   playerCards.forEach((card) => (card.style.visibility = "visible"));
@@ -140,9 +211,34 @@ function resetRound() {
   playerCards.forEach((card) =>
     card.addEventListener("click", setPlayerChoice),
   );
+  roundModal.close();
 }
 
-function updateWalletUI() {
+function checkBigStat(winner) {
+  if (winner.bigW <= gameObj.roundBet) {
+    winner.bigW = gameObj.roundBet;
+  }
+
+  updateStatsUI();
+}
+
+function addChoiceStats(obj) {
+  switch (obj.currentChoice) {
+    case "Rock":
+      obj.rpsCount[0]++;
+      break;
+    case "Paper":
+      obj.rpsCount[1]++;
+      break;
+    case "Scissors":
+      obj.rpsCount[2]++;
+      break;
+  }
+}
+
+function updateBetUI() {
+  minBetEl.textContent = gameObj.minBet;
+  roundBetEl.textContent = gameObj.roundBet;
   pWalletEl.textContent = playerObj.wallet;
   cWalletEl.textContent = computerObj.wallet;
 }
@@ -153,14 +249,12 @@ function updateStatsUI() {
   pPaper.textContent = playerObj.rpsCount[1];
   pScissors.textContent = playerObj.rpsCount[2];
   pBigW.textContent = playerObj.bigW;
-  pBigL.textContent = playerObj.bigL;
 
   /* Computer Stats */
   cRock.textContent = computerObj.rpsCount[0];
   cPaper.textContent = computerObj.rpsCount[1];
   cScissors.textContent = computerObj.rpsCount[2];
   cBigW.textContent = computerObj.bigW;
-  cBigL.textContent = computerObj.bigL;
 }
 
 function capitalizeString(str) {
@@ -174,6 +268,5 @@ function createPlayer(name) {
     wallet: gameObj.buyIn,
     rpsCount: [0, 0, 0],
     bigW: 0,
-    bigL: 0,
   };
 }
