@@ -6,7 +6,7 @@ const cWalletEl = document.querySelector("#cWalletDisp");
 const minBetEl = document.querySelector("#minBetDisp");
 const roundBetEl = document.querySelector("#roundBetDisp");
 
-/* Selected Card Placements */
+/* Selected Cards */
 const pCardEl = document.querySelector("#pCardSelect");
 const cCardEl = document.querySelector("#cCardSelect");
 
@@ -135,7 +135,9 @@ function setPlayerChoice(event) {
     );
     const selectEl = event.currentTarget;
     playerObj.currentChoice = selectEl.getAttribute("data-card");
-    selectEl.style.opacity = 0;
+    hideElement(selectEl);
+    const selectedQ = `[data-card=${playerObj.currentChoice}]`;
+    showElement(pCardEl.querySelector(selectedQ));
 
     setComputerChoice();
   }
@@ -161,7 +163,9 @@ function setComputerChoice() {
       break;
   }
   computerObj.currentChoice = choice;
-  computerCards[handNum].style.opacity = 0;
+  hideElement(computerCards[handNum]);
+  const selectedQ = `[data-card=${choice}]`;
+  showElement(cCardEl.querySelector(selectedQ));
 
   setTimeout(decideRound, SECOND * 2);
 }
@@ -228,8 +232,10 @@ function displayRoundResult(title, text, btn) {
 }
 
 function resetRound() {
-  playerCards.forEach((card) => (card.style.opacity = 1));
-  computerCards.forEach((card) => (card.style.opacity = 1));
+  playerCards.forEach((card) => showElement(card));
+  computerCards.forEach((card) => showElement(card));
+  pCardEl.querySelectorAll("[data-card]").forEach((card) => hideElement(card));
+  cCardEl.querySelectorAll("[data-card]").forEach((card) => hideElement(card));
   computerObj.currentChoice = null;
   playerObj.currentChoice = null;
   playerCards.forEach((card) =>
@@ -242,6 +248,14 @@ function gameOver(title) {
   updateBetUI();
   finalModal.showModal();
   finalTitle.textContent = title;
+}
+
+function showElement(el) {
+  el.style.opacity = 1;
+}
+
+function hideElement(el) {
+  el.style.opacity = 0;
 }
 
 function checkBigStat(winner) {

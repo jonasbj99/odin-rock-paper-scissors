@@ -104,6 +104,11 @@
       position: absolute;
       width: 50%;
     }
+
+    [data-card] {
+      position: absolute;
+      opacity: 0;
+    }
   }
 
   #pCardSelect {
