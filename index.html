@@ -31,6 +31,7 @@
 
     <dialog id="betModal" class="modal">
       <div class="flex-col">
+        <h2 id="betTitle">Change Bet</h2>
         <label>
           How much do you want to bet?
           <input id="betInput" type="number" step="50" min="50" max="1000" />
@@ -40,19 +41,26 @@
     </dialog>
 
     <dialog id="roundModal" class="modal">
-      <div class="flex-col" style="align-items: center">
+      <div class="flex-col">
         <h2 id="roundTitle">Title</h2>
         <p id="roundText">Round Text</p>
         <button id="roundBtn" class="modal-btn">Button Text</button>
       </div>
     </dialog>
-    <!-- Round Result Dialog -->
-    <!-- Maybe combine with bet dialog -->
-    <!-- Continue button -->
 
-    <!-- Game Result Dialog -->
-    <!-- Result Text -->
-    <!-- Play Again Button -->
+    <dialog id="finalModal" class="modal">
+      <div class="flex-col">
+        <div class="modal-title flex-col">
+          <p>The Game is Over</p>
+          <h2 id="finalTitle">You Won</h2>
+        </div>
+        <p>
+          Thanks for playing my game, feel free to try it again
+          <span class="smiley">ü</span>
+        </p>
+        <button id="replayBtn" class="modal-btn">Play Again</button>
+      </div>
+    </dialog>
 
     <main class="full-screen flex-row">
       <div class="flex-col">
@@ -103,7 +111,12 @@
         <div class="selected-cards">
           <div id="pCardSelect">
             <span class="select-indicator">YOUR CARD</span>
+            <!--             <div data-card="Scissors" class="game-card">
+              <img class="card-icon" src="./img/scissors-icon.svg" />
+              <span class="card-text">Scissors</span>
+            </div> -->
           </div>
+
           <div class="current-bet flex-col">
             <div class="small-panel">
               <div class="flex-col">
@@ -114,6 +127,7 @@
             </div>
             <button class="bet-btn" id="showBetBtn">Change Bet</button>
           </div>
+
           <div id="cCardSelect">
             <img
               class="select-indicator"

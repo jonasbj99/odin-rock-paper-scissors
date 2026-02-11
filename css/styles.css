@@ -238,7 +238,6 @@
   font-family: var(--title-font);
 
   & > .flex-col {
-    align-items: stretch;
     gap: 20px;
   }
 
@@ -247,6 +246,7 @@
   }
 
   label {
+    align-self: stretch;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -299,4 +299,10 @@ button {
     background-color: var(--back-col);
     color: var(--acc-col);
   }
+}
+
+.smiley {
+  font-family: var(--title-font);
+  font-weight: 700;
+  font-size: 1.2em;
 }

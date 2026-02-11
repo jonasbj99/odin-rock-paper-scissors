@@ -37,10 +37,12 @@ startBtn.addEventListener("click", startGame);
 
 /* Change Bet */
 const showBetBtn = document.querySelector("#showBetBtn");
-showBetBtn.addEventListener("click", showChangeBet);
+showBetBtn.addEventListener("click", () => showChangeBet("Change Bet"));
 
 const betModal = document.querySelector("#betModal");
+const betTitle = document.querySelector("#betTitle");
 const betInput = document.querySelector("#betInput");
+betInput.addEventListener("change", betValidation);
 const closeBetBtn = document.querySelector("#closeBetBtn");
 closeBetBtn.addEventListener("click", closeChangeBet);
 
@@ -51,6 +53,12 @@ const roundText = document.querySelector("#roundText");
 const roundBtn = document.querySelector("#roundBtn");
 roundBtn.addEventListener("click", resetRound);
 
+/* Game Over */
+const finalModal = document.querySelector("#finalModal");
+const finalTitle = document.querySelector("#finalTitle");
+const replayBtn = document.querySelector("#replayBtn");
+replayBtn.addEventListener("click", () => window.location.reload());
+
 const gameObj = {
   buyIn: 1000,
   minBet: 50,
@@ -60,8 +68,8 @@ const gameObj = {
   tCount: 0,
 };
 
-const computerObj = createPlayer("ü");
-const playerObj = createPlayer("Player");
+const computerObj = createPlayer();
+const playerObj = createPlayer();
 
 startModal.showModal();
 
@@ -80,17 +88,33 @@ function startGame() {
   startModal.close();
 }
 
-function showChangeBet() {
+function showChangeBet(title) {
   betModal.showModal();
+  const minWallet = getMinValue(playerObj.wallet, computerObj.wallet);
+  betTitle.textContent = title;
   betInput.setAttribute("min", gameObj.minBet);
-  betInput.setAttribute(
-    "max",
-    playerObj.wallet > computerObj.wallet
-      ? computerObj.wallet
-      : playerObj.wallet,
-  );
-  betInput.value =
-    gameObj.roundBet > gameObj.minBet ? gameObj.roundBet : gameObj.minBet;
+  betInput.setAttribute("max", minWallet);
+  if (gameObj.roundBet > minWallet) {
+    betInput.value = minWallet;
+  } else {
+    betInput.value =
+      gameObj.roundBet > gameObj.minBet ? gameObj.roundBet : gameObj.minBet;
+  }
+}
+
+function betValidation(event) {
+  const input = event.currentTarget;
+  const minWallet = getMinValue(playerObj.wallet, computerObj.wallet);
+  const inRange = input.value < minWallet && input.value > gameObj.minBet;
+  if (!inRange) {
+    if (input.value > minWallet) {
+      input.value = minWallet;
+    } else if (input.value < gameObj.minBet) {
+      input.value = gameObj.minBet;
+    }
+  } else if (input.value % 50 > 0) {
+    input.value = input.value - (input.value % 50);
+  }
 }
 
 function closeChangeBet() {
@@ -104,16 +128,16 @@ function setPlayerChoice(event) {
     playerObj.wallet < gameObj.roundBet ||
     computerObj.wallet < gameObj.roundBet
   ) {
-    /* !?! Bet too high */
+    showChangeBet("Your bet was too big!");
   } else {
     playerCards.forEach((card) =>
       card.removeEventListener("click", setPlayerChoice),
     );
     const selectEl = event.currentTarget;
     playerObj.currentChoice = selectEl.getAttribute("data-card");
-    selectEl.style.visibility = "hidden";
+    selectEl.style.opacity = 0;
 
-    setTimeout(setComputerChoice, SECOND);
+    setComputerChoice();
   }
 }
 
@@ -137,9 +161,9 @@ function setComputerChoice() {
       break;
   }
   computerObj.currentChoice = choice;
-  computerCards[handNum].style.visibility = "hidden";
+  computerCards[handNum].style.opacity = 0;
 
-  setTimeout(decideRound, SECOND);
+  setTimeout(decideRound, SECOND * 2);
 }
 
 function decideRound() {
@@ -190,10 +214,10 @@ function decideRound() {
 }
 
 function displayRoundResult(title, text, btn) {
-  if (computerObj <= 0) {
-    /* !?! Win condition */
-  } else if (playerObj <= 0) {
-    /* !?! Lose Condition */
+  if (computerObj.wallet <= 0) {
+    gameOver("You Win! :)");
+  } else if (playerObj.wallet <= 0) {
+    gameOver("You Lose! :(");
   } else {
     updateBetUI();
     roundTitle.textContent = title;
@@ -204,14 +228,20 @@ function displayRoundResult(title, text, btn) {
 }
 
 function resetRound() {
-  playerCards.forEach((card) => (card.style.visibility = "visible"));
-  computerCards.forEach((card) => (card.style.visibility = "visible"));
+  playerCards.forEach((card) => (card.style.opacity = 1));
+  computerCards.forEach((card) => (card.style.opacity = 1));
   computerObj.currentChoice = null;
   playerObj.currentChoice = null;
   playerCards.forEach((card) =>
     card.addEventListener("click", setPlayerChoice),
   );
   roundModal.close();
+}
+
+function gameOver(title) {
+  updateBetUI();
+  finalModal.showModal();
+  finalTitle.textContent = title;
 }
 
 function checkBigStat(winner) {
@@ -257,13 +287,16 @@ function updateStatsUI() {
   cBigW.textContent = computerObj.bigW;
 }
 
+function getMinValue(a, b) {
+  return a > b ? b : a;
+}
+
 function capitalizeString(str) {
   return str.charAt(0).toUpperCase() + str.substring(1).toLowerCase();
 }
 
 function createPlayer(name) {
   return {
-    name,
     currentChoice: null,
     wallet: gameObj.buyIn,
     rpsCount: [0, 0, 0],
