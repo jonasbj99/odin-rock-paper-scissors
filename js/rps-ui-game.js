@@ -167,7 +167,7 @@ function setComputerChoice() {
   const selectedQ = `[data-card=${choice}]`;
   showElement(cCardEl.querySelector(selectedQ));
 
-  setTimeout(decideRound, SECOND * 2);
+  setTimeout(decideRound, SECOND);
 }
 
 function decideRound() {
